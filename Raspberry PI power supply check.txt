@@ -1,0 +1,22 @@
+Raspberry PI power supply check
+
+import subprocess
+import time
+
+def check_undervoltage():
+    try:
+        output = subprocess.check_output(["vcgencmd", "get_throttled"])
+        status = output.decode("utf-8").strip()
+        if status != "throttled=0x0":
+            print("Warning: Undervoltage or throttling detected!")
+            print(f"Status code: {status}")
+        else:
+            print("Power supply is stable. No throttling or undervoltage detected.")
+    except Exception as e:
+        print("Error checking power status:", e)
+
+if __name__ == "__main__":
+    print("Raspberry Pi Power Check\n")
+    while True:
+        check_undervoltage()
+        time.sleep(5)  # check every 5 seconds (change if you want)

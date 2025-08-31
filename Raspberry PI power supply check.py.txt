@@ -1,4 +1,4 @@
-Raspberry PI power supply check
+#Raspberry PI power supply check
 
 import subprocess
 import time
